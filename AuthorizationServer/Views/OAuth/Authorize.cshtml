@@ -1,0 +1,49 @@
+﻿@model AuthUser
+<link href="~/css/login.css" rel="stylesheet" />
+@{ 
+    var routeData = $"oauth/authorize/{TempData["query"]}";
+}
+<div class="container">
+    <div class="col-lg-12">
+        <h1 class="text-center">Ebrahim Authorization Server</h1>
+        <br/>
+        <br/>
+        <section class="row d-flex justify-content-center">
+            <form url="@routeData" method="post" class="login-form">
+                    <div class="alert alert-primary text-center" role="alert">
+                        <span>
+                            <a class="text-primary" href="@ViewData["AppWebsite"]"> <strong>@ViewData["AppName"]</strong> </a>
+                            <span>
+                                wants to read your
+                                <b class="text-info">@ViewData["Scope"]</b>
+                            </span>      
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    @{
+                        if (TempData.TryGetValue("LoginError", out object loginError) == true)
+                        {
+                            <div class="row d-flex justify-content-center">
+                                <p class="text-danger">@loginError</p>
+                            </div>
+                        }
+                    }
+                    <div class="flex-column d-flex justify-content-center">
+
+                        <button type="submit" class="btn btn-success">Accept and Login</button>
+                        <br />
+                        <button class="btn btn-outline-primary" asp-controller="account" asp-action="register">Create new account</button>
+
+                    </div>
+            </form>
+        </section>
+    </div>
+</div>

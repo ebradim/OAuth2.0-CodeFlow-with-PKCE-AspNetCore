@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Random Client Notes App</h1>
+
+    <p>Let's share awesome notes together</p>
+
+    @if (Model is not null)
+    {
+        <h1 class="text-success">@Model</h1>
+    }
+    else
+    {
+        <p class="text-warning">Please sign in to recieve data</p>
+
+    }
+
+</div>
